@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Form\CarType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
@@ -21,9 +23,22 @@ final class CarController extends AbstractController
     }
 
     #[Route('/ajouter', name: 'create')]
-    public function create(): Response
+    public function create(Request $request): Response
     {
-        return $this->render('car/create.html.twig', []);
+        $car = new Car();
+        $form = $this->createForm(CarType::class, $car);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($car);
+            $this->em->flush();
+
+            return $this->redirectToRoute('home_index');
+        }
+
+        return $this->render('car/create.html.twig', [
+            "form" => $form
+        ]);
     }
 
     /**

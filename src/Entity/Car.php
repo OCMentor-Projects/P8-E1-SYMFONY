@@ -38,6 +38,9 @@ class Car
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $gearType = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +126,18 @@ class Car
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getGearType(): ?string
+    {
+        return $this->gearType;
+    }
+
+    public function setGearType(string $gearType): static
+    {
+        $this->gearType = $gearType;
 
         return $this;
     }
