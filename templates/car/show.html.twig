@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<section id="car">
+		<a href="{{ path('home_index') }}">← Retour</a>
+		<h1>{{ car.brand }}
+			{{ car.model }}</h1>
+
+		<p class="description-car">BMW est connu pour ses voitures puissantes et luxueuses - la BMW iX ne fait pas exception. Avec une puissance allant de 326 ch (BMW iX 40) à 523 ch (BMW iX 50) et une autonomie de 408 (BMW iX 40) à 590 kilomètres (BMW iX 50), la BMW iX offre tout ce que l'on peut attendre d'une voiture électrique.</p>
+
+		<div class="advantages">
+			{% include "components/single-advantage.html.twig" with {
+            advantage: car.kilometerMax ? car.kilometerMax ~ 'Km' : 'Km illimités'
+        } %}
+			{% include "components/single-advantage.html.twig" with {
+            advantage: 'Taxe routière incluse'
+        } %}
+			{% include "components/single-advantage.html.twig" with {
+            advantage: 'Assistance dépannage 24/7'
+        } %}
+			{% include "components/single-advantage.html.twig" with {
+            advantage: 'Pas de frais caché'
+        } %}
+			{% include "components/single-advantage.html.twig" with {
+            advantage: 'Assurance au tiers'
+        } %}
+			{% include "components/single-advantage.html.twig" with {
+            advantage: 'Réservation sécurisée'
+        } %}
+		</div>
+
+		<hr>
+
+		<p class="legal-information">Les conducteurs doivent avoir leur permis de conduire depuis au moins 5 ans.</p>
+
+		<div class="total-rent">
+			<span>Total</span>
+			<span>{{ car.monthlyPrice | number_format(2, ',', ' ') }}
+				€/mois</span>
+		</div>
+		<button class="btn-add">Louer pour
+			{{car.monthlyPrice | number_format(0) }}€/mois</button>
+
+		<!-- Bouton inactif -->
+	</section>
+
+	<section id="insurances">
+		<h2>Les Assurances et Assistances</h2>
+
+		<div class="insurances-list">
+			<div class="single-insurance">
+				<img src="{{ asset('icons/basic.png') }}" alt="Basique"/>
+				<h3>Protection Basique</h3>
+				<p><img src="{{ asset('icons/checked.png') }}" alt=""/>
+					Assurance dommages pour les dommages par collision, les rayures, les chocs et le vol.</p>
+			</div>
+			<div class="single-insurance">
+				<img src="{{ asset('icons/complete.png') }}" alt="Complète"/>
+				<h3>Protection Complète</h3>
+				<p><img src="{{ asset('icons/checked.png') }}" alt=""/>
+					Assurance dommages pour les dommages par collision, les rayures, les chocs et le vol.</p>
+				<p><img src="{{ asset('icons/checked.png') }}" alt=""/>
+					Protection pneus et vitres.</p>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
