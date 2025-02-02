@@ -26,6 +26,12 @@ final class CarController extends AbstractController
         return $this->render('car/create.html.twig', []);
     }
 
+    /**
+     * Forcé la méthode DELETE permet de sécuriser la suppresion, si il s'agissait d'une simple route GET, le partage d'un lien pourrait supprimer une voiture.
+     * Ici, on force la méthode DELETE, ce qui oblige à passer par un formulaire pour supprimer une voiture.
+     * Pour pouvoir utiliser le champs caché de type DELETE, il faut ajouter un input de type hidden avec le nom _method et la valeur DELETE.
+     * Aussi il faut spécifier dans config/packages/framework.yaml la clé http_method_override à true dans la clé framework. 
+     */
     #[Route('/supprimer/{id}', name: 'delete', methods: ["DELETE"], requirements: ['id' => Requirement::DIGITS])]
     public function delete(Car $car): Response
     {
