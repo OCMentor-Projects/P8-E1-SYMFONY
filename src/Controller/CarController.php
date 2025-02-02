@@ -33,7 +33,7 @@ final class CarController extends AbstractController
             $this->em->persist($car);
             $this->em->flush();
 
-            return $this->redirectToRoute('home_index');
+            return $this->redirectToRoute('car_show', ["id" => $car->getId()]);
         }
 
         return $this->render('car/create.html.twig', [

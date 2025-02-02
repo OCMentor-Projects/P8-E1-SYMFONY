@@ -6,7 +6,7 @@
 		<h1>{{ car.brand }}
 			{{ car.model }}</h1>
 
-		<p class="description-car">BMW est connu pour ses voitures puissantes et luxueuses - la BMW iX ne fait pas exception. Avec une puissance allant de 326 ch (BMW iX 40) à 523 ch (BMW iX 50) et une autonomie de 408 (BMW iX 40) à 590 kilomètres (BMW iX 50), la BMW iX offre tout ce que l'on peut attendre d'une voiture électrique.</p>
+		<p class="description-car">{{ car.description | nl2br }}</p>
 
 		<div class="advantages">
 			{% include "components/single-advantage.html.twig" with {
